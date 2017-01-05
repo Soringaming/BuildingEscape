@@ -7,8 +7,10 @@
 */Intermediate
 */Saved
 BuildingEscape/Content/StarterContent/
+BuildingEscape/Content
 
 ######################
 # VS Generated Files #
 ######################
 *.VC.db
+*.VC.VC.opendb
