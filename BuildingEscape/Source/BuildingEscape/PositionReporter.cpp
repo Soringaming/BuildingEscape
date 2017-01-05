@@ -20,7 +20,9 @@ void UPositionReporter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
+	// Temp log message
+	// TODO Remove log message
+	UE_LOG(LogTemp, Warning, TEXT("Postion reporter initialized on Chair!"));
 	
 }
 
