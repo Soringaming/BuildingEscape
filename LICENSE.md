@@ -1,2 +1,2 @@
 
-Copyright (C) 2017 Soringaming
+Copyright © 2017 Olirexen Games, Ltd
