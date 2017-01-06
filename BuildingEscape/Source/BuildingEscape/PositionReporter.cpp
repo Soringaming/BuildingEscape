@@ -22,7 +22,9 @@ void UPositionReporter::BeginPlay()
 
 	// Temp log message
 	// TODO Remove log message
-	UE_LOG(LogTemp, Warning, TEXT("Postion reporter initialized on Chair!"));
+	FString ObjectName = GetOwner()->GetName();
+	FString ObjectPos = GetOwner()->GetTransform().GetLocation().ToString();
+	UE_LOG(LogTemp, Warning, TEXT("%s is at %s"), *ObjectName, *ObjectPos);
 	
 }
 
