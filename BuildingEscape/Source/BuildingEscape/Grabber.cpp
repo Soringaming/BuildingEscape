@@ -43,12 +43,27 @@ void UGrabber::TickComponent( float DeltaTime, ELevelTick TickType, FActorCompon
 	OUT PlayerViewPointRotation
 	);
 
+	// TODO, remove this silly log sometime when you know you wont need it.
+	// Might need it for later, so keep it for now.
 	/*UE_LOG(LogTemp, Warning, TEXT("Location: %s, Rotation: %s"),
 		*PlayerViewPointLocation.ToString(),
 		*PlayerViewPointRotation.ToString()
 	)*/
 
+	FVector TraceLineEndPoint = PlayerViewPointLocation + (PlayerViewPointRotation.Vector() * Reach);
+
 	// Draw a debug line 
+
+	DrawDebugLine(
+		GetWorld(),
+		PlayerViewPointLocation,
+		TraceLineEndPoint,
+		FColor(255, 0, 0),
+		false,
+		0.f,
+		0,
+		10.f
+	);
 
 	// Ray-cast out to reach distance
 	
