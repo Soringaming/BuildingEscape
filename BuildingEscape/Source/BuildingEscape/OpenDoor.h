@@ -33,7 +33,7 @@ private:
 	float CloseAngle = 90.f;
 
 	UPROPERTY(EditAnywhere)
-	ATriggerVolume* PressurePlate;
+	ATriggerVolume* PressurePlate; // this triggered me, mai dude. ALL THE PUNS
 
 	UPROPERTY(EditAnywhere)
 	float DoorCloseDelay = 0.6f; // The default delay to wait before closing the door, this is editable in the editor.
