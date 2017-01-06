@@ -1,4 +1,4 @@
-// Copyright © Olirexen Games, Ltd 2017
+ï»¿// Copyright (C) Olirexen Games, Ltd 2017
 
 #include "BuildingEscape.h"
 #include "PositionReporter.h"
