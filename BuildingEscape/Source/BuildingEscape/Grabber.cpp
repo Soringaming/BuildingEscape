@@ -48,7 +48,7 @@ void UGrabber::TickComponent( float DeltaTime, ELevelTick TickType, FActorCompon
 		*PlayerViewPointRotation.ToString()
 	)*/
 
-	// Draw a debug line
+	// Draw a debug line 
 
 	// Ray-cast out to reach distance
 	
