@@ -15,7 +15,8 @@ public:
 	// Sets default values for this component's properties
 	UOpenDoor();
 	
-	void UOpenDoor::OpenDoor();
+	void OpenDoor();
+	void CloseDoor();
 
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -25,13 +26,22 @@ public:
 
 private:
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditAnywhere)
 	float OpenAngle = 180.f;
+
+	UPROPERTY(EditAnywhere)
+	float CloseAngle = 90.f;
 
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PressurePlate;
 
+	UPROPERTY(EditAnywhere)
+	float DoorCloseDelay = 0.6f; // The default delay to wait before closing the door, this is editable in the editor.
+
+	float LastDoorOpenTime; // Float that is set to a value when the door is opened
+
 	UPROPERTY(VisibleAnywhere)
 	AActor* ActorThatOpens; // Remeber pawn inherits from Actor
+	AActor* Owner; // The owning door
 	
 };
