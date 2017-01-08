@@ -34,5 +34,13 @@ private:
 
 	// Called when the grab is released
 	void Release();
+
+	// Used to make sure we have a Physics Handle Component
+	void UGrabber::FindPhysicsHandleComponenet();
+
+	// Setup (assumed) attached input component
+	void SetUpInputComponent();
+
+	void RayCast();
 	
 };
