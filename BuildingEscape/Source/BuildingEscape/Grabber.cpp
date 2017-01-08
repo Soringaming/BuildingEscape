@@ -24,23 +24,47 @@ void UGrabber::BeginPlay()
 
 	// Temp log
 	// TODO Remove logging message.
-	UE_LOG(LogTemp, Warning, TEXT("Grabber reporting for duty!"))
-	
+	UE_LOG(LogTemp, Warning, TEXT("Grabber reporting for duty!"));
+
+	/// Look for attached Physics Handle
+	PhysicsHandle = GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();
+	if (PhysicsHandle)
+	{
+		// PhysicsHandle was found
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Unable to find the Physics Handle Component for: %s"), *GetOwner()->GetName());
+	}
+
+	/// Look for attached Input Component
+	InputComponent = GetOwner()->FindComponentByClass<UInputComponent>();
+	if (InputComponent)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("The input component for %s has been found."), *GetOwner()->GetName());
+		/// Bind the input action
+		InputComponent->BindAction("Grab", IE_Pressed, this, &UGrabber::Grab())
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("The input component for %s is missing!"), *GetOwner()->GetName());
+	}
+
 }
 
 
 // Called every frame
-void UGrabber::TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction )
+void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
-	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// Grab the players veiw point
 	FVector PlayerViewPointLocation;
 	FRotator PlayerViewPointRotation;
 
 	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
-	OUT PlayerViewPointLocation,
-	OUT PlayerViewPointRotation
+		OUT PlayerViewPointLocation,
+		OUT PlayerViewPointRotation
 	);
 
 	// TODO, remove this silly log sometime when you know you wont need it.
@@ -82,11 +106,11 @@ void UGrabber::TickComponent( float DeltaTime, ELevelTick TickType, FActorCompon
 
 	AActor* HitActor = Hit.GetActor();
 
-	if(HitActor)
+	if (HitActor)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Actor hit: %s"), *HitActor->GetName())
 	}
-	
+
 	// See if we have hit anything, and if we have what is it?
 }
 
