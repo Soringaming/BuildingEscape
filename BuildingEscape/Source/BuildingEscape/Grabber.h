@@ -29,7 +29,10 @@ private:
 
 	UInputComponent* InputComponent = nullptr;
 
-	// The member function that allows us to grab things!
+	// The member function that allows us to grab things
 	void Grab();
+
+	// Called when the grab is released
+	void Release();
 	
 };
