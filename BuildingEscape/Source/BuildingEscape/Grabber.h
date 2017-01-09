@@ -41,5 +41,13 @@ private:
 	// Setup (assumed) attached input component
 	void SetUpInputComponent();
 
+	// Returns hit for first physics body in reach
 	const FHitResult GetFirstPhysicsBodyInReach();
+
+	// Return the start of the trace line
+	FVector GetTraceLineStartPoint();
+
+	// Return the end of the trace line
+	FVector GetTraceLineEndPoint();
+
 };
