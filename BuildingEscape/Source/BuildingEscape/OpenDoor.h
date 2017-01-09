@@ -45,5 +45,8 @@ private:
 
 	// Returns the weight in kg
 	float GetTotalMassOfActorsOnPlate();
+
+	UPROPERTY(EditAnywhere)
+	float MinimumWieghtToTrigger = 5;
 	
 };
