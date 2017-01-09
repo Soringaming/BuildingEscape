@@ -66,7 +66,7 @@ void UGrabber::Grab()
 {
 	/// Try to reach any actors with physics body collision channel set
 	auto HitResult = GetFirstPhysicsBodyInReach();
-	auto ComponentToGrab = HitResult.GetComponent();
+	auto ComponentToGrab = HitResult.GetComponent(); /// Gets the mesh in out case
 	auto ActorHit = HitResult.GetActor();
 
 	/// If we hit something then attach a physics handle
@@ -89,7 +89,7 @@ const FHitResult UGrabber::GetFirstPhysicsBodyInReach()
 	GetWorld()->LineTraceSingleByObjectType(OUT HitResult, GetTraceLineStartPoint(), GetTraceLineEndPoint(),
 	FCollisionObjectQueryParams(ECollisionChannel::ECC_PhysicsBody), TraceParamaters);
 
-	AActor* HitActor = Hit.GetActor();
+	AActor* HitActor = HitResult.GetActor();
 	if (HitActor)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Actor hit: %s"), *HitActor->GetName())

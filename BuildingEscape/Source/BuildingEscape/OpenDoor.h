@@ -41,7 +41,9 @@ private:
 	float LastDoorOpenTime; // Float that is set to a value when the door is opened
 
 	UPROPERTY(VisibleAnywhere)
-	AActor* ActorThatOpens; // Remeber pawn inherits from Actor
 	AActor* Owner; // The owning door
+
+	// Returns the weight in kg
+	float GetTotalMassOfActorsOnPlate();
 	
 };
