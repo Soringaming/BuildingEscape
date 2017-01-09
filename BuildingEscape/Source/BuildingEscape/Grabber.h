@@ -41,6 +41,5 @@ private:
 	// Setup (assumed) attached input component
 	void SetUpInputComponent();
 
-	void RayCast();
-	
+	const FHitResult GetFirstPhysicsBodyInReach();
 };

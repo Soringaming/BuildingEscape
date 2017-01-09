@@ -29,7 +29,22 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	RayCast();
+	// Grab the players veiw point
+	FVector PlayerViewPointLocation;
+	FRotator PlayerViewPointRotation;
+	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
+		OUT PlayerViewPointLocation,
+		OUT PlayerViewPointRotation
+	);
+
+	FVector TraceLineEndPoint = PlayerViewPointLocation + (PlayerViewPointRotation.Vector() * Reach);
+
+	// if the physcics handle is attached
+	if (PhysicsHandle->GrabbedComponent)
+	{
+		// move the object that we are holding
+		PhysicsHandle->SetTargetLocation(TraceLineEndPoint);
+	}
 
 }
 
@@ -69,15 +84,32 @@ void UGrabber::SetUpInputComponent()
 void UGrabber::Grab()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Grab pressed"));
+
+	/// Try to reach any actors with physics body collision channel set
+	auto HitResult = GetFirstPhysicsBodyInReach();
+	auto ComponentToGrab = HitResult.GetComponent();
+	auto ActorHit = HitResult.GetActor();
+
+	/// If we hit something then attach a physics handle
+	if (ActorHit)
+	{
+		// attach physcics handle
+		PhysicsHandle->GrabComponent(
+			ComponentToGrab,
+			NAME_None,
+			ComponentToGrab->GetOwner()->GetActorLocation(),
+			true // Allow rotation
+		);
+	}
 }
 
 void UGrabber::Release()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Grab released"));
+	PhysicsHandle->ReleaseComponent();
 }
 
-// Raycasting for Actors in the game with Physics bodys
-void UGrabber::RayCast()
+const FHitResult UGrabber::GetFirstPhysicsBodyInReach()
 {
 	// Grab the players veiw point
 	FVector PlayerViewPointLocation;
@@ -89,19 +121,17 @@ void UGrabber::RayCast()
 
 	FVector TraceLineEndPoint = PlayerViewPointLocation + (PlayerViewPointRotation.Vector() * Reach);
 
-	// Draw a debug line 
-	DrawDebugLine(GetWorld(), PlayerViewPointLocation, TraceLineEndPoint, FColor(255, 0, 0), false, 0.f, 0, 10.f);
-
 	// Setup query paramaters
 	FCollisionQueryParams TraceParamaters(FName(TEXT("")), false, GetOwner());
 	FHitResult Hit;
-	GetWorld()->LineTraceSingleByObjectType(OUT Hit, PlayerViewPointLocation, TraceLineEndPoint, 
-	FCollisionObjectQueryParams(ECollisionChannel::ECC_PhysicsBody), TraceParamaters);
+	GetWorld()->LineTraceSingleByObjectType(OUT Hit, PlayerViewPointLocation, TraceLineEndPoint,
+		FCollisionObjectQueryParams(ECollisionChannel::ECC_PhysicsBody), TraceParamaters);
 
 	AActor* HitActor = Hit.GetActor();
 	if (HitActor)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Actor hit: %s"), *HitActor->GetName())
 	}
+	return Hit;
 }
 

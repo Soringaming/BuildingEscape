@@ -36,7 +36,7 @@ private:
 	ATriggerVolume* PressurePlate; // this triggered me, mai dude. ALL THE PUNS
 
 	UPROPERTY(EditAnywhere)
-	float DoorCloseDelay = 0.6f; // The default delay to wait before closing the door, this is editable in the editor.
+	float DoorCloseDelay = 1.1f; // The default delay to wait before closing the door, this is editable in the editor.
 
 	float LastDoorOpenTime; // Float that is set to a value when the door is opened
 
