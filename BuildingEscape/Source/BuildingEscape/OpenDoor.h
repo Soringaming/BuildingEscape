@@ -47,6 +47,6 @@ private:
 	float GetTotalMassOfActorsOnPlate();
 
 	UPROPERTY(EditAnywhere)
-	float MinimumWieghtToTrigger = 5;
+	float MinimumWieghtToTrigger = 5.f;
 	
 };
