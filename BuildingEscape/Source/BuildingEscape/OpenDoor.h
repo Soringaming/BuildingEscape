@@ -33,7 +33,7 @@ private:
 	float CloseAngle = 90.f;
 
 	UPROPERTY(EditAnywhere)
-	ATriggerVolume* PressurePlate; // this triggered me, mai dude. ALL THE PUNS
+	ATriggerVolume* PressurePlate = nullptr; // this triggered me, mai dude. ALL THE PUNS
 
 	UPROPERTY(EditAnywhere)
 	float DoorCloseDelay = 1.1f; // The default delay to wait before closing the door, this is editable in the editor.
@@ -41,7 +41,7 @@ private:
 	float LastDoorOpenTime; // Float that is set to a value when the door is opened
 
 	UPROPERTY(VisibleAnywhere)
-	AActor* Owner; // The owning door
+	AActor* Owner = nullptr; // The owning door
 
 	// Returns the weight in kg
 	float GetTotalMassOfActorsOnPlate();
